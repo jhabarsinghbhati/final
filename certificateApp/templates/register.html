@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<div class='jumbotron'>
+	<div class=''
+		style='
+			background: black;
+			margin-top: 0px;
+			position: relative;
+			bottom: 47px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+		'
+
+	>
+		<img src="{% static 'images/intern.jpeg' %}"
+			style='height:200px;
+				margin-top: 0px;
+				margin: 5px;
+			'
+			class='img-thumbnail'
+		>
+		<span>
+			<h1 style='display: inline;color:white;text-shadow: 1px 1px 10px gold;
+				font-size: 45px;font-weight: bolder;
+			'>
+				REGISTER FOR THE INTERNSHIP
+			</h1>
+		</span>
+	</div>
+	<form method="POST" id='register' class='shadow container p-3 m-3'
+		style='border: 2px solid red;
+		outline: 1px solid  red;
+		outline-offset: 2px;
+		padding: 40px;
+		'
+	>	
+		{% csrf_token %}
+		{{ form.as_p }}		
+		<input type="submit" name="Register" value='Register' class='px-3 mr-3 mt-3 btn btn-primary'>
+		<a href="{% url 'certificate_app:login' %}" class='mx-3 btn btn-warning mt-3'
+			data-toggle="tooltip" 
+			data-placement="right" 
+			title="Login If You Already Have An Account"
+		>Login</a>
+	</form>
+</div>
+<script>
+	$('[data-toggle="tooltip"]').tooltip('show')
+
+</script>
+
+{% endblock %}

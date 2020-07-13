@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block content %}
+	<div class='jumbotron'>
+		<p class="lead text-center my-3 font-weight"
+			style='
+				font-family: ubuntu;
+				font-weight: bolder;
+				font-size: 30px;
+				padding-top: 20px;
+				padding-bottom: 20px;
+				text-shadow: 1px 1px 3px silver;
+			'
+		>
+			Are You Sure You Want To Logout ?
+		</p>
+		<form class="container w-75 container shadow bg-transparent p-3 mt-4 text-center" id="login" method="POST">
+			{% csrf_token %}
+			<input type="submit" value="CONFIRM" name="ok" class="btn btn-primary mt-4 mr-5">
+			<input type="submit" value="CANCEL" name="cancel" class="btn btn-danger mt-4 ml-5">
+		</form>
+	</div>
+{% endblock %}

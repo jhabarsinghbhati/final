@@ -1,0 +1,604 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Check</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style type="text/css">
+        *,
+        *::before,
+        *::after {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .side-bar {
+            width: 400px;
+            height: 100vh;
+            background: indigo;
+            border: 1px solid lightgreen;
+            position: fixed;
+            z-index: 3;
+            top: 0px;
+            right: 0px;
+            transition: 100ms linear;
+            overflow: scroll;
+        }
+
+        .side-bar-close {
+            transform: translateX(400px);
+            height: 100vh;
+            background: indigo;
+            border: 1px solid lightgreen;
+            position: fixed;
+            z-index: 3;
+            transition: 100ms linear;
+        }
+
+        .side-bar>div.closed {
+            position: absolute;
+            top: 0px;
+            background: indigo;
+            padding: 10px 15px;
+            right: -41px;
+            color: white;
+            font-family: ubuntu;
+            font-size: 20px;
+            font-weight: bolder;
+            cursor: pointer;
+            z-index: 6;
+        }
+
+        .certificate-body {
+            width: 100%;
+            background: pink;
+            text-align: center;
+        }
+
+        .certificate-body>img {
+            width: 1000px;
+            height: 750px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+        .internship-logo{
+            position: absolute;
+            top: 520px;
+            left: 600px;
+            z-index: 7;
+            width: 100px;
+        }
+        .signature-logo{
+            position: absolute;
+            top: 300px;
+            left: 600px;
+            z-index: 7;
+            width: 100px;
+        }
+        .ui-draggable{
+            cursor: grab;
+        }
+        .ui-draggable:active{
+            cursor: grabbing;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='side-bar'>
+        <form id="ckt-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- <div class='closed'>
+			X
+		</div> -->
+
+
+            <!-- ################################################### -->
+
+            <div class='container'>
+                <div class="input-group mt-5">
+                    <p style="color: aliceblue;" class="mb-0">Certificate file</p>
+                    <!-- <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+				  <option selected>Upload Certificate</option>
+				  <option value="1">One</option>
+				  <option value="2">Two</option>
+				  <option value="3">Three</option>
+				</select> -->
+                    <div class="input-group-append">
+                        <!-- <button class=" upload-certificate btn btn-outline-secondary text-light text-uppercase font-weight-bolder" type="button">upload</button> -->
+                        <input
+                            class="upload-logo btn btn-outline-secondary text-light text-uppercase font-weight-bolder"
+                            type="file" name="ckt" id="ckt">
+                    </div>
+                </div>
+            </div>
+
+            <div class='container'>
+                <div class="input-group mt-2">
+                    <p style="color: aliceblue;" class="mb-0">Logo file</p>
+                    <!-- <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+				  <option selected>Upload Logo</option>
+				  <option value="1">One</option>
+				  <option value="2">Two</option>
+				  <option value="3">Three</option>
+				</select> -->
+                    <div class="input-group-append">
+                        <!-- <button class=" upload-logo btn btn-outline-secondary text-light text-uppercase font-weight-bolder" type="button">upload</button> -->
+                        <input
+                            class="upload-logo btn btn-outline-secondary text-light text-uppercase font-weight-bolder"
+                            type="file" name="logo" id="logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class='container'>
+                <div class="input-group mt-2">
+                    <p style="color: aliceblue;" class="mb-0">Signature file</p>
+                    <!-- <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+				  <option selected>Upload Signature</option>
+				  <option value="1">One</option>
+				  <option value="2">Two</option>
+				  <option value="3">Three</option>
+				</select> -->
+                    <div class="input-group-append">
+                        <!-- <button class=" upload-signature btn btn-outline-secondary text-light text-uppercase font-weight-bolder" type="button">upload</button> -->
+                        <input
+                            class="upload-logo btn btn-outline-secondary text-light text-uppercase font-weight-bolder"
+                            type="file" name="sign" id="sign">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- ################################################### -->
+        <div class='container mt-3'>
+
+            <!-- 111111111111111111111111111111111111111111111111111111111111111111 -->
+            <p>
+                <button class="btn btn-primary form-control mt-2" type="button" data-toggle="collapse"
+                    data-target="#caollapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Reference No
+                </button>
+            </p>
+            <div class="collapse ref-no-control " id="caollapseExample">
+                <div class="card card-body">
+                    <input type='text' placeholder='Ref No' class='form-control' id='ref-no'>
+                    <button class='btn btn-danger my-2 create-ref-no'>+</button>
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Font Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 22222222222222222222222222222222222222222222222222222222  intern name -->
+
+
+
+
+
+            <p>
+                <button class="btn btn-primary form-control mt-2" type="button" data-toggle="collapse"
+                    data-target="#collapseExamplename" aria-expanded="false" aria-controls="collapseExample">
+                    Intern Name
+                </button>
+            </p>
+            <div class="collapse name-control " id="collapseExamplename">
+                <div class="card card-body">
+                    <input type='text' placeholder='Intern Name' class='form-control' id='inter_name'>
+                    <button class='btn btn-danger my-2 create-intern-name'>+</button>
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Font Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <!-- internship name  -->
+
+
+
+            <p>
+                <button class="btn btn-primary form-control mt-2" type="button" data-toggle="collapse"
+                    data-target="#collapseExample12" aria-expanded="false" aria-controls="collapseExample">
+                    Internship Name
+                </button>
+            </p>
+            <div class="collapse internship-control " id="collapseExample12">
+                <div class="card card-body">
+                    <input type='text' placeholder='Internship Name' class='form-control' id='internship_name'>
+                    <button class='btn btn-danger my-2 create-internship-name'>+</button>
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Font Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- from  -->
+
+
+            <p>
+                <button class="btn btn-primary form-control mt-2" type="button" data-toggle="collapse"
+                    data-target="#collapseExamplefrom" aria-expanded="false" aria-controls="collapseExample">
+                    Starting Date
+                </button>
+            </p>
+            <div class="collapse from-control " id="collapseExamplefrom">
+                <div class="card card-body">
+                    <input type='text' placeholder='Starting Date' class='form-control' id='starting_date'>
+                    <button class='btn btn-danger my-2 create-from'>+</button>
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Font Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <!-- to -->
+
+
+            <p>
+                <button class="btn btn-primary form-control mt-2" type="button" data-toggle="collapse"
+                    data-target="#tocollapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Ending Date
+                </button>
+            </p>
+            <div class="collapse to-control " id="tocollapseExample">
+                <div class="card card-body">
+                    <input type='text' placeholder='Ending Date' class='form-control' id='ending_date'>
+                    <button class='btn btn-danger my-2 create-to'>+</button>
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Font Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <!-- post -->
+
+
+            <p>
+                <button class="btn btn-primary form-control mt-2" type="button" data-toggle="collapse"
+                    data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Designation
+                </button>
+            </p>
+            <div class="collapse post-control " id="collapseExample">
+                <div class="card card-body">
+                    <input type='text' placeholder='Designation' class='form-control' id='designation'>
+                    <button class='btn btn-danger my-2 create-post'>+</button>
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Font Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- date  -->
+
+
+            <p>
+                <button class="btn btn-primary form-control mt-2" type="button" data-toggle="collapse"
+                    data-target="#dacollapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Date
+                </button>
+            </p>
+            <div class="collapse date-control " id="dacollapseExample">
+                <div class="card card-body">
+                    <input type='text' placeholder='Date' class='form-control' id='date'>
+                    <button class='btn btn-danger my-2 create-date'>+</button>
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Font Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- /////Last -->
+
+            <p>
+
+                <button class="btn btn-primary form-control mt-1 logo-invisibles" type="button"
+                    data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    Logo
+                </button>
+            </p>
+            <div class="collapse logo-btn" id="collapseExample1">
+                <div class="card card-body">
+
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Image Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- /  sign -->
+
+
+            <p>
+
+                <button class="btn btn-primary form-control mt-1 sign-logo-invisibles" type="button"
+                    data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    Signature
+                </button>
+            </p>
+            <div class="collapse sign-logo-btn" id="collapseExample3">
+                <div class="card card-body">
+
+                    <div class='my-3 mx-auto text-align-center'>
+                        <h5 class='font-weight-bolder mx-auto text-center'>Image Size</h5>
+                        <button class='btn btn-primary px-3 decrease-size'>-</button>
+                        <button class='btn btn-primary px-3 increase-size'>+</button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light font-size-badge">16</span>
+                        </button>
+                    </div>
+                    <div class='mx-auto'>
+                        <h5 class='text-center font-weight-bolder mx-auto'>Coordinates</h5>
+                        <button class='btn btn-primary px-3 left'>&larr;</button>
+                        <button class='btn btn-primary px-3 up '>&uarr;</button>
+                        <button class='btn btn-primary px-3 down '>&darr;</button>
+                        <button class='btn btn-primary px-3 right '>&rarr;</button>
+                    </div>
+                    <div class='mt-3 text-center '>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light x-coordinate-badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <span class="badge badge-light y-coordinate-badge">0</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+             <div class='container text-light mb-1 ml-4'>
+                 <input type="checkbox" class="form-check-input " id="exampleCheckitOut">Check To Upload
+             </div>
+
+            <div class='container mb-5 '>
+                <button id="submit-btn" class='btn form-control btn-warning mt-2'>
+                    Upload Certificate
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <div class="certificate-body">
+        <img id="ckt-img"></img>
+    </div>
+    <div class='appender'>
+        <img id="logo-img" class="internship-logo"></img>
+        <img id="sign-img" class="signature-logo"></img>
+    </div>
+    <button class='show-me btn btn-danger font-weight:bolder'
+        style='position: fixed; top:10px; left: 1	0px;border-radius: 20px;' data-toggle="tooltip" data-placement="right" title="double tap to toogle menu">
+        X
+    </button>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static 'js/certificate.js' %}"></script>
+    <script type="text/javascript">
+        document.querySelector('.show-me').addEventListener('dblclick', () => {
+            document.querySelector('.side-bar').classList.toggle('side-bar-close')
+        })
+    </script>
+
+</body>
+
+</html>

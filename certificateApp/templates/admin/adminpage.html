@@ -1,0 +1,241 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div style='height:20vh;'>
+        <img src="{% static 'images/road.jpeg' %}"
+            style='transform:rotateX(80deg);
+            width: 100%;
+            height: 40vh;
+            position: relative;
+            bottom:10px;
+            '
+        >
+    <div >
+        <div class='w-100' style='position: absolute;z-index:2;top:10px;left:0px;>
+            <div class='cars ' >
+                <strong class="text-uppercase font-weight-bolder"
+                    style='position: relative;bottom:40px;left: 120px;'
+                >{{request.user.userprofile.get_full_name}}</strong>
+                <img src="{% static 'images/car.png' %}"
+                    style='
+                        width:150px;
+                    '
+                >
+            </div>
+        </div>
+    </div>
+        <div style='position:absolute;top:10px;right: 15px; z-index:4'>
+            <div class=''>
+                    <a class="nav-link text-uppercase lead font-weight-bold" href="{% url 'certificate_app:confirm_logout' %}"
+                    style='position: relative;top:70px;left:100px;  color:black;display: inline;height:50px;color:white;'
+                    >signout</a> 
+                    <img class='' src="{% static 'images/traf.png' %}" style='width: 80px'> 
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- 
+<div class="ml-auto p-3">
+    <div>
+        <div class='driver'
+            style='
+            position:absolute;
+            top:0px;
+            left:0px;
+            z-index:2;
+            width: 150px;
+            '
+         >
+            <strong class="text-uppercase font-weight-bolder">{{request.user.userprofile.get_full_name}}</strong>
+            <img src="{% static 'images/car.png' %}"
+                style='
+                    width:150px;
+                '
+            >
+        </div>
+    </div>
+    
+    <div>
+          <a class="nav-link text-uppercase lead font-weight-bolde" href="{% url 'logout' %}">signout</a>  
+    </div>
+    
+</div> -->
+
+
+<div class='d-flex justify-content-around py-3 align-items-center'
+    style='
+        background: linear-gradient(to right, rgba(0, 255, 0, .1), rgba(0, 255, 0, .4), rgba(0, 255, 0, .6));
+        flex-wrap: wrap;
+    '
+
+>
+    <div class='nav-item pt-2'>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/irsc_logo.png' %}"
+                style='
+                    width:400px;
+                    padding-right:50px; 
+                '
+                >
+
+            </a>
+        </div>
+        <div class='h2 pt-2' style="font-weight: bolder;
+                        font-family:ubuntu;
+                        color: white;
+                        font-size: 40px;
+                        text-shadow: 3px 2px 10px black;"
+        >
+            ISRC ADMIN
+        </div>
+</div>
+<div class="container">
+    <!-- Message -->
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <div class="bg-light p-5 pb-3 rounded overflow-auto">
+        <form class="row row-cols-md-auto g-3 align-items-center">
+            <div class="col-12">
+                <select class="form-select" aria-label="Default select example" id="select" onchange="selectType()">
+                    <option selected value='1'>search Intern by</option>
+                    <option value="first_name">First Name</option>
+                    <option value="last_name">Last Name</option>
+                    <option value="reg_number">Registration Number</option>
+                    <option value="days_from_now">Internship ending within days from now</option>
+                    <option value="update_request">Details Update request</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <input placeholder="All" disabled class="form-control" type="text" name="" id="searchfield" min="0">
+            </div>
+            <div class="col-12">
+                <button class='btn btn-sm btn-primary' type="submit">search</button>
+            </div>
+        </form>
+        <div class="mt-2 float-left" id="filter"><strong>Filtered all the intern ...</strong></div>
+        <a class="float-right" href="{% url 'certificate_app:certificateconfig' %}">Configure certificate</a>
+    </div>
+</div>
+<div class="table-responsive bg-light mt-3 px-1">
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Details</th>
+                <th scope="col">Reg. No.</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Mentor</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Report</th>
+                <th scope="col">Marked status</th>
+                <th scope="col">Certificate Generated</th>
+                <th scope="col">Certificate Serial No.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in user %}
+            {% if u.personaldetail %}
+            <tr>
+                <th scope="row">{{forloop.counter}}.</th>
+                <td><a style="cursor: pointer;" class="text-decoration-none" data-toggle="modal"
+                        data-target="#exampleModal{{u.id}}">view</a></td>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{u.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" style="max-width: 90%;">
+                        <div class="modal-content mb-4">
+                            <div class="modal-header bg-light p-3">
+                                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                                <h5 class="modal-title">Intern details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body{{u.id}}">
+                                <div id="modal-spin{{u.id}}" style="display: none;">
+                                    <div class="d-flex justify-content-center flex-column align-items-center my-5">
+                                        <div class="spinner-border text-danger" style="width: 8rem; height: 8rem;" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <div class="m-3">Loading...</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <script>
+                    let k{{u.id}} = 0
+                    var myModal = document.getElementById('exampleModal{{u.id}}')
+
+                    myModal.addEventListener('shown.bs.modal', function () {
+                        if(k{{u.id}} == 0){
+                            $('#modal-spin{{u.id}}').show()
+                            $.ajax({
+                                url: "{% url 'certificate_app:iframe' u.user.id %}",
+                                success: (data) => {
+                                    k{{u.id}}++;
+                                    $('#modal-spin{{u.id}}').hide()
+                                    $('.modal-body{{u.id}}').append(data)
+                                },
+                                error: (data) => {
+                                    $('#modal-spin{{u.id}}').hide()
+                                    $('.modal-body{{u.id}}').append('<div class="m-2 text-danger text-center">Something went wrong please contact developer</div>')
+                                }
+                            });
+                        }
+                    })
+                </script>
+
+                <td>{{u.registration_number}}</td>
+                <td>{{u.first_name}}</td>
+                <td>{{u.last_name}}</td>
+                <td>{{u.project.mentor_or_leader}}</td>
+                <td>{{u.project.joining_date}}</td>
+                <td>{{u.project.end_date}}</td>
+                {% if u.report %}
+                <td>Submitted</td>
+                <td id="page-status{{u.user.id}}">{{u.report.get_status_display}}</td>
+                {% else %}
+                <td>Not Submitted</td>
+                <td id="page-status{{u.user.id}}">-</td>
+                {% endif %}
+
+                {% if u.certificate %}
+                <td id="certificate-generated{{u.user.id}}">yes</td>
+                <td id="certificate-number{{u.user.id}}"><a class="text-decoration-none"
+                        href="{{u.certificate.certificate_pdf.url}}" target="_blank">{{u.certificate.certificate_number}}</a></td>
+                {% else %}
+                <td id="certificate-generated{{u.user.id}}">No</td>
+                <td id="certificate-number{{u.user.id}}">-</td>
+                {% endif %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if not user %}
+    <h2>No search results.</h2>
+    {% endif %}
+</div>
+<script type="text/javascript" src="{% static 'js/admin.js' %}"></script>
+{% endblock content %}

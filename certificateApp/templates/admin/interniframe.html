@@ -1,0 +1,350 @@
+{% comment %} {% extends 'base.html' %}
+{% block content %} {% endcomment %}
+<div class="container">
+    <!-- <h2 class="bg-light p-4 my-2">Intern details</h2> -->
+    <div class="bg-light my-2 p-2 py-4 rounded">
+        <h4 class="text-center p-2 mb-4 border-bottom">Personal Details</h4>
+        <div class="my-2">
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong> ID</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.user.email}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong> Registration number</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.userprofile.registration_number}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>First Name</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.userprofile.first_name}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Last Name</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.userprofile.last_name}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Phn Contact No.</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.ph_contact_no}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>WhatsApp No.</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.whatsapp_no}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Project</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.project}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Profile</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.profile}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Type of Intership</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.type_of_internship}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Joining Date</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.joining_date}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>PAN Number</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.pan_number}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Aadhaar No.</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.aadhaar}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Emergency Contact No.</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.emergency_contact_no}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Bank Account Number</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.bank_account_no}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>IFSC Code</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.ifsc_code}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>DOB</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.dob}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Permanent Address</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.permanent_address}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Current Address</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.current_address}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>BioMetric ID Number</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.biometric_id_number}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Intership Tenure</strong></div>
+                <div class="col-8 align-self-center">
+                    {{details.internship_tenure}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Resume</strong></div>
+                <div class="col-8 align-self-center">
+                    <a href="{{details.resume.url}}" target="_blank">Link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-light my-2 p-2 py-4 rounded">
+        <h4 class="text-center p-2 mb-4 border-bottom">Project Details</h4>
+        {% if project %}
+        <div class="my-2">
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Profile</strong></div>
+                <div class="col-8 align-self-center">
+                    {{project.profile}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Project Worked on</strong></div>
+                <div class="col-8 align-self-center">
+                    {{project.project_worked_on}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Status</strong></div>
+                <div class="col-8 align-self-center">
+                    {{project.status}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Tenure</strong></div>
+                <div class="col-8 align-self-center">
+                    {{project.tenure}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Joining Date</strong></div>
+                <div class="col-8 align-self-center">
+                    {{project.joining_date}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>End Date</strong></div>
+                <div class="col-8 align-self-center">
+                    {{project.end_date}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Upload Traker Link</strong></div>
+                <div class="col-8 align-self-center">
+                    <a href="{{project.upload_traker_link}}" target="_blank">{{project.upload_traker_link}}</a>
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Details of Work done</strong></div>
+                <div class="col-8 align-self-center">
+                    {{project.detail_of_work}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Alotted Mentor / Team Leader</strong></div>
+                <div class="col-8 align-self-center">
+                    {{project.mentor_or_leader}}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <h5 class="pl-sm-5">Project not alloted to user.</h5>
+        {% endif %}
+    </div>
+
+    <div class="bg-light my-2 p-2 py-4 rounded">
+        <h4 class="text-center p-2 mb-4 border-bottom">Report Details</h4>
+        {% if report %}
+        <div id="report{{user.id}}" class="my-2">
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Project Name</strong></div>
+                <div class="col-8 align-self-center">
+                    {{report.project_name}}
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>Uploaded Report</strong></div>
+                <div class="col-8 align-self-center text-break">
+                    <a href="{{report.upload_report.url}}" target="_blank">Report Link</a>
+                </div>
+            </div>
+            <div class="row px-sm-5 my-2">
+                <div class="col-4"><strong>current Status</strong></div>
+                <div id="current-status{{user.id}}" class="col-8 align-self-center text-break">
+                    {{report.get_status_display}}
+                </div>
+            </div>
+            <div id="statusdiv{{user.id}}" class="row px-sm-5 my-2">
+                <div class="col-4"><strong>change Status</strong></div>
+                <div id="status{{user.id}}" class="col-8 align-self-center text-break">
+                    <form onsubmit="changestatus(event,{{user.id}})" id="status-form{{user.id}}"
+                        action="{% url 'certificate_app:change_status' user.id %}" method="get">
+                        <div class="row row-cols-md-auto g-3">
+                            <div class="col-12">
+                                <select class="form-select" name="status">
+                                    <option value="A">Approve</option>
+                                    <option value="P">Pending</option>
+                                    <option value="R">Reject</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <button id="status-btn{{user.id}}" class="btn btn-sm btn-primary" type="submit">
+                                    <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
+                                        style="display: none;"></span>Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+        <h5 class="pl-sm-5">Report not submitted.</h5>
+        {% endif %}
+    </div>
+
+    <div class="bg-light my-2 p-2 py-4 rounded">
+        <div class="row px-sm-5 my-2">
+            <div class="col-4"><strong>Certificate</strong></div>
+            <div id="certificate-div{{user.id}}" class="col-8 align-self-center text-break">
+                {% if not user.report %}
+                Not Eligible
+                {% elif user.certificate %}
+                <a href="{{user.certificate.certificate_pdf.url}}" target="=_blank">PDF</a>
+                <a href="{{user.certificate.certificate_png.url}}" download target="=_blank">PNG</a>
+                <button
+                    onclick="deleteCertificate(this,{{user.id}},`{% url 'certificate_app:delete_certificate' user.id %}`)"
+                    class="ml-2 btn btn-sm btn-dark">
+                    <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
+                        style="display: none;"></span>Delete</button>
+                {% else %}
+                <button
+                    onclick="generatecertificate(this,`{% url 'certificate_app:create_certificate' user.id %}`,{{user.id}})"
+                    class="mr-2 btn btn-sm btn-dark">
+                    <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
+                        style="display: none;"></span>Generate</button>
+                or
+                <button class="mx-2 btn btn-sm btn-danger"
+                    onClick="upload('{% url 'certificate_app:certificate_upload' user.id %}','upload certificate for user.first_name')">Upload</button>
+                {% endif %}
+            </div>
+        </div>
+        {% comment %} <div class="d-flex justify-content-center mt-5">
+            <!-- <a class="btn btn-success mx-5" href="">Generate certificate</a> -->
+            <button class="btn btn-success mx-5"></button>
+            <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
+                style="display: none;"></span>Generate Certificate
+            </button>
+        </div> {% endcomment %}
+
+        <div class="row px-sm-5 my-2">
+            <div class="col-4"><strong>Intern requested personal detail change</strong></div>
+            <div id="personal{{user.id}}" class="col-8 align-self-center">
+                {% if details.is_editable == 'A' %}
+                Approved(Intern not updated details yet now.)
+                {% elif details.is_editable == 'R' %}
+                Rejected
+                {% elif details.request_edit %}
+                yes
+                {% else %}
+                No
+                {% endif %}
+            </div>
+        </div>
+        {% if details.request_edit %}
+        <div class="row px-sm-5 my-2">
+            <div class="col-4"><strong>Reason of change</strong></div>
+            <div class="col-8 align-self-center">
+                <p class="text-muted">{{details.edit_reason}}</p>
+                <button class="btn btn-sm btn-success"
+                    onclick="approvestatus(this,{{user.id}},`{% url 'certificate_app:change_personal_update' user.id %}?status=A`,'personal{{user.id}}','approved')"><span
+                        class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
+                        style="display: none;"></span>approve</button>
+                <button class="btn btn-sm btn-danger"
+                    onclick="approvestatus(this,{{user.id}},`{% url 'certificate_app:change_personal_update' user.id %}?status=R`,'personal{{user.id}}','rejected')">
+                    <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
+                        style="display: none;"></span>reject</button>
+            </div>
+        </div>
+        {% endif %}
+
+
+        <div class="row px-sm-5 my-2">
+            <div class="col-4"><strong>Intern requested Project detail change</strong></div>
+            <div id="project{{user.id}}" class="col-8 align-self-center">
+                {% if project.is_editable == 'A' %}
+                Approved(Intern not updated details yet now.)
+                {% elif project.is_editable == 'R' %}
+                Rejected
+                {% elif project.request_edit %}
+                yes
+                {% else %}
+                No
+                {% endif %}
+            </div>
+        </div>
+        {% if project.request_edit %}
+        <div class="row px-sm-5 my-2">
+            <div class="col-4"><strong>Reason of change</strong></div>
+            <div class="col-8 align-self-center">
+                <p class="text-muted">{{project.edit_reason}}</p>
+                <button class="btn btn-sm btn-success"
+                    onclick="approvestatus(this,{{user.id}},`{% url 'certificate_app:change_project_update' user.id %}?status=A`,'project{{user.id}}','approved')"><span
+                        class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
+                        style="display: none;"></span>approve</button>
+                <button class="btn btn-sm btn-danger"
+                    onclick="approvestatus(this,{{user.id}},`{% url 'certificate_app:change_project_update' user.id %}?status=R`,'project{{user.id}}','rejected')">
+                    <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
+                        style="display: none;"></span>reject</button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% comment %} {% endblock content %} {% endcomment %}
